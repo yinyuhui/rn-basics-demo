@@ -10,9 +10,15 @@ const HelloWorldApp = (props) => {
                 alignItems: 'center',
             }}>
             <Button
-                title="flat list demo"
+                title="flatList demo"
                 onPress={() => {
                     props.navigation.navigate('FlatListDemo')
+                }}
+            />
+            <Button
+                title="sectionList demo"
+                onPress={() => {
+                    props.navigation.navigate('SectionListDemo')
                 }}
             />
         </View>
