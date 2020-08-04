@@ -6,8 +6,19 @@ const HomePage = (props) => {
     return (
         <View style={{ flex: 1, justifyContent: 'center' }}>
             <Button
+                title="BottomTabNavigators"
+                onPress={() => {
+                    navigation.navigate('BottomTabNavigators')
+                }}
+            />
+            <Button
+                title="TopBarNavigators"
+                onPress={() => {
+                    navigation.navigate('TopBarNavigators')
+                }}
+            />
+            <Button
                 title="page1"
-                textAllCaps={false}
                 onPress={() => {
                     navigation.navigate('Page1', { name: '动态' })
                 }}

@@ -1,7 +1,10 @@
 import React from 'react'
 
 import { createStackNavigator } from 'react-navigation-stack'
-import { createBottomTabNavigator } from 'react-navigation-tabs'
+import {
+    createBottomTabNavigator,
+    createMaterialTopTabNavigator,
+} from 'react-navigation-tabs'
 import { createAppContainer } from 'react-navigation'
 
 import { Button, Text } from 'react-native'
@@ -13,6 +16,47 @@ import Page2 from '../pages/Page2'
 import Page3 from '../pages/Page3'
 import SectionListDemo from '../pages/SectionListDemo'
 import FlatListDemo from '../pages/FlatListDemo'
+
+const TopBarNavigators = createMaterialTopTabNavigator(
+    {
+        Page1: {
+            screen: Page1,
+            navigationOptions: {
+                tabBarLabel: 'Page1',
+            },
+        },
+        Page2: {
+            screen: Page2,
+            navigationOptions: {
+                tabBarLabel: 'Page2',
+            },
+        },
+        Page3: {
+            screen: Page3,
+            navigationOptions: {
+                tabBarLabel: 'Page3',
+            },
+        },
+    },
+    {
+        tabBarOptions: {
+            labelStyle: {
+                // color: 'orange',
+                fontSize: 16,
+            },
+            upperCaseLabel: false,
+            style: {
+                backgroundColor: '#fff',
+            },
+            indicatorStyle: {
+                backgroundColor: '#e98',
+                height: 2,
+            },
+            activeTintColor: '#e98', // 活动标签的标签和图标颜色
+            inactiveTintColor: 'orange',
+        },
+    },
+)
 
 const BottomTabNavigators = createBottomTabNavigator(
     {
@@ -66,8 +110,13 @@ const BottomTabNavigators = createBottomTabNavigator(
 const AppStackNavigators = createStackNavigator(
     {
         Home: {
-            // screen: HomePage,
+            screen: HomePage,
+        },
+        BottomTabNavigators: {
             screen: BottomTabNavigators,
+        },
+        TopBarNavigators: {
+            screen: TopBarNavigators,
         },
         Page1: {
             screen: Page1,
