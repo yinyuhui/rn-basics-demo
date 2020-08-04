@@ -1,9 +1,11 @@
 import React from 'react'
 
 import { createStackNavigator } from 'react-navigation-stack'
+import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { createAppContainer } from 'react-navigation'
 
-import { Button } from 'react-native'
+import { Button, Text } from 'react-native'
+import Feather from 'react-native-vector-icons/Feather'
 
 import HomePage from '../pages/HomePage'
 import Page1 from '../pages/Page1'
@@ -12,10 +14,60 @@ import Page3 from '../pages/Page3'
 import SectionListDemo from '../pages/SectionListDemo'
 import FlatListDemo from '../pages/FlatListDemo'
 
-const AppStackNavigators = createStackNavigator(
+const BottomTabNavigators = createBottomTabNavigator(
     {
         HomePage: {
             screen: HomePage,
+            navigationOptions: {
+                tabBarLabel: 'Home', // 可以接收字符串
+                tabBarIcon: ({ tintColor, focused }) => (
+                    <Feather
+                        name="home"
+                        size={20}
+                        style={{ color: tintColor }}
+                    />
+                ),
+            },
+        },
+
+        Page1: {
+            screen: Page1,
+            navigationOptions: {
+                // 也可以接收一个组件
+                tabBarLabel: ({ focused }) => (
+                    <Text
+                        style={{
+                            color: focused ? 'red' : 'grey',
+                            fontSize: 11,
+                            textAlign: 'center',
+                            marginBottom: 1.5,
+                        }}>
+                        page1
+                    </Text>
+                ),
+                tabBarIcon: ({ focused, tintColor }) => (
+                    <Feather
+                        name="list"
+                        size={20}
+                        style={{ color: focused ? 'red' : 'grey' }}
+                    />
+                ),
+            },
+        },
+    },
+    {
+        tabBarOptions: {
+            // 整体修改选中状态下的颜色
+            activeTintColor: 'orange',
+        },
+    },
+)
+
+const AppStackNavigators = createStackNavigator(
+    {
+        Home: {
+            // screen: HomePage,
+            screen: BottomTabNavigators,
         },
         Page1: {
             screen: Page1,
