@@ -5,7 +5,7 @@ import {
     createBottomTabNavigator,
     createMaterialTopTabNavigator,
 } from 'react-navigation-tabs'
-import { createAppContainer } from 'react-navigation'
+import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 
 import { Button, Text } from 'react-native'
 import Feather from 'react-native-vector-icons/Feather'
@@ -16,6 +16,7 @@ import Page2 from '../pages/Page2'
 import Page3 from '../pages/Page3'
 import SectionListDemo from '../pages/SectionListDemo'
 import FlatListDemo from '../pages/FlatListDemo'
+import Login from '../pages/Login'
 
 const TopBarNavigators = createMaterialTopTabNavigator(
     {
@@ -109,12 +110,15 @@ const BottomTabNavigators = createBottomTabNavigator(
 
 const AppStackNavigators = createStackNavigator(
     {
-        Home: {
-            screen: HomePage,
-        },
-        BottomTabNavigators: {
-            screen: BottomTabNavigators,
-        },
+        // 如果只有一个 screen 属性，可以简写
+        Home: HomePage,
+        // Home: {
+        //     screen: HomePage,
+        // },
+        BottomTabNavigators,
+        // BottomTabNavigators: {
+        //     screen: BottomTabNavigators,
+        // },
         TopBarNavigators: {
             screen: TopBarNavigators,
         },
@@ -168,6 +172,16 @@ const AppStackNavigators = createStackNavigator(
     // },
 )
 
-export default AppStackNavigators
+const AuthNavigator = createStackNavigator({
+    Login: Login,
+})
+
+const SwitchNavigators = createSwitchNavigator({
+    Auth: AuthNavigator,
+    Home: AppStackNavigators,
+})
+
+export default SwitchNavigators
+// export default AppStackNavigators
 
 // export default createAppContainer(AppStackNavigators)
