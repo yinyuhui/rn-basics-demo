@@ -1,11 +1,14 @@
 import React from 'react'
+import { ScrollView } from 'react-native'
+import SafeAreaView from 'react-native-safe-area-view'
 
+import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
 import {
     createBottomTabNavigator,
     createMaterialTopTabNavigator,
 } from 'react-navigation-tabs'
-import { createAppContainer, createSwitchNavigator } from 'react-navigation'
+import { createDrawerNavigator, DrawerItems } from 'react-navigation-drawer'
 
 import { Button, Text } from 'react-native'
 import Feather from 'react-native-vector-icons/Feather'
@@ -17,6 +20,50 @@ import Page3 from '../pages/Page3'
 import SectionListDemo from '../pages/SectionListDemo'
 import FlatListDemo from '../pages/FlatListDemo'
 import Login from '../pages/Login'
+
+const DrawerNavigator = createDrawerNavigator(
+    {
+        Page1: {
+            screen: Page1,
+            navigationOptions: {
+                drawerLabel: 'page1',
+                drawerIcon: ({ tintColor, focused }) => (
+                    <Feather
+                        name="list"
+                        fontSize={30}
+                        style={{ color: focused ? tintColor : 'grey' }}
+                    />
+                ),
+            },
+        },
+        Page2: {
+            screen: Page2,
+            navigationOptions: {
+                drawerLabel: 'page2',
+                drawerIcon: ({ focused }) => (
+                    <Feather
+                        name="home"
+                        style={{ color: focused ? 'red' : 'black' }}
+                    />
+                ),
+            },
+        },
+    },
+    {
+        contentComponent: (props) => {
+            return (
+                <ScrollView style={{ backgroundColor: '#463', flex: 1 }}>
+                    <SafeAreaView forceInset={{ top: 'always' }}>
+                        <DrawerItems {...props} activeTintColor="#703" />
+                    </SafeAreaView>
+                </ScrollView>
+            )
+        },
+        contentOptions: {
+            // 全局配置
+        },
+    },
+)
 
 const TopBarNavigators = createMaterialTopTabNavigator(
     {
@@ -119,9 +166,8 @@ const AppStackNavigators = createStackNavigator(
         // BottomTabNavigators: {
         //     screen: BottomTabNavigators,
         // },
-        TopBarNavigators: {
-            screen: TopBarNavigators,
-        },
+        TopBarNavigators,
+        DrawerNavigator,
         Page1: {
             screen: Page1,
             // 动态设置 navigationOptions
@@ -173,7 +219,12 @@ const AppStackNavigators = createStackNavigator(
 )
 
 const AuthNavigator = createStackNavigator({
-    Login: Login,
+    Login: {
+        screen: Login,
+        navigationOptions: {
+            headerShown: false,
+        },
+    },
 })
 
 const SwitchNavigators = createSwitchNavigator({

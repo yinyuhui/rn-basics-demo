@@ -6,6 +6,12 @@ const HomePage = (props) => {
     return (
         <View style={{ flex: 1, justifyContent: 'center' }}>
             <Button
+                title="DrawerNavigator"
+                onPress={() => {
+                    navigation.navigate('DrawerNavigator')
+                }}
+            />
+            <Button
                 title="BottomTabNavigators"
                 onPress={() => {
                     navigation.navigate('BottomTabNavigators')

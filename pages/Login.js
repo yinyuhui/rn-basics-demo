@@ -4,8 +4,7 @@ import { View, Text, Button } from 'react-native'
 const Login = (props) => {
     const { navigation } = props
     return (
-        <View>
-            <Text>Login</Text>
+        <View style={{ flex: 1, justifyContent: 'center' }}>
             <Button
                 title="login"
                 onPress={() => {

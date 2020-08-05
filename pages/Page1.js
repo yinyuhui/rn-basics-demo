@@ -18,6 +18,12 @@ const Page1 = (props) => {
                     navigation.navigate('Page2')
                 }}
             />
+            <Button
+                title="open drawer navigator"
+                onPress={() => {
+                    navigation.openDrawer()
+                }}
+            />
         </View>
     )
 }
